@@ -3,7 +3,11 @@ from pygame.draw import *
 
 pygame.init()
 FPS = 30
-sc = pygame.display.set_mode((1200, 900))
+
+width = 1200
+height = 900
+
+sc = pygame.display.set_mode((width, height))
 
 WHITE = (255, 255, 255)
 RED=(255, 0, 0)
@@ -13,19 +17,19 @@ LIGHT_BLUE = (154, 218, 255)
 GREEN = (0, 200, 64)
 YELLOW = (225, 225, 0)
 PINK = (230, 50, 230)
-T= (255, 223, 196)
+SKIN = (255, 223, 196) 
 
 sc.fill(LIGHT_BLUE)
 
-def boy(x):
-    ellipse(sc, (167, 147, 172),(140+x, 390, 120, 240))
-    line(sc, BLACK, [160+x, 600], [120+x, 750])
-    line(sc, BLACK, [120+x, 750], [90+x, 750])
-    line(sc, BLACK, [239+x, 600], [259+x, 750])
-    line(sc, BLACK, [259+x, 750], [289+x, 750])
-    circle(sc, T, (200+x, 360), 50)
-    line(sc, BLACK, [160+x, 420], [80+x, 520])
-    line(sc, BLACK, [240+x, 420], [320+x, 520])
+def boy(x, y=390, scale=1):
+    ellipse(sc, GRAY, (x, y, int(scale*120), int(scale*240)))
+    line(sc, BLACK, [int(scale*120) + x, int(scale*210) + y], [int(scale*(-20)) + x, int(scale*360) + y])
+    line(sc, BLACK, [int(scale*(-20)) + x, int(scale*360) + y], [int(scale*(-50)) + x, int(scale*360) + y])
+    line(sc, BLACK, [int(scale*99) + x, int(scale*210) + y], [int(scale*119) + x, int(scale*360) + y])
+    line(sc, BLACK, [int(scale*119) + x, int(scale*360) + y], [int(scale*149) + x, int(scale*360) + y])
+    circle(sc, SKIN, (int(scale*(-80)) + x, int(scale*(-30)) + y), int(scale*(50)))
+    line(sc, BLACK, [int(scale*(-120)) + x, int(scale*30) + y], [int(scale*(-60)) + x, int(scale*130) + y])
+    line(sc, BLACK, [int(scale*(-40)) + x, int(scale*30) + y], [int(scale*180) + x, int(scale*130) + y])
     
 def ice(x,y):
     polygon(sc, YELLOW, [[x, 235+y], [-62+x, y+200], [-62+x, 270+y], [x, y+235]])
@@ -33,9 +37,9 @@ def ice(x,y):
     circle(sc, (85, 0, 0), (x-13, y+217),18)
     circle(sc, (255, 255, 255), (x-17, y+190),18)
     
-def girl(x):
-    polygon(sc, PINK, [[440+x, 370], [515+x, 630], [365+x, 630], [440+x, 370]])
-    circle(sc, T, (440+x, 360), 50)
+def girl(x, scale=1):
+    polygon(sc, PINK, [[int(scale*140) + x, 370], [515+x, 630], [365+x, 630], [440+x, 370]])
+    circle(sc, SKIN, (440+x, 360), 50)
     line(sc, BLACK, [410+x, 630], [410+x, 750])
     line(sc, BLACK, [380+x, 750], [410+x, 750])
     line(sc, BLACK, [470+x, 630], [470+x, 750])
@@ -54,7 +58,7 @@ def ball(x,y):
     circle(sc, RED, (x-590-56, 275+y), 24)
 
 rect(sc, GREEN, (0,500, 1400, 300))    
-boy(30)
+boy(30, 400, 1.3)
 girl(30)
 ball(675, 77)
 girl(290)
